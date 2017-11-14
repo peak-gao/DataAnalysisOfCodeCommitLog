@@ -14,7 +14,8 @@ def createDictionary(changeset, user, date, summary):
         'user': user,
         'date': dateValue.strftime('%Y-%m-%d'),
         'summary': summary,
-        'weekday': calendar.day_abbr[dateValue.weekday()]
+        'weekday': calendar.day_abbr[dateValue.weekday()],
+        'month': dateValue.month
     }
 
 
