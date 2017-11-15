@@ -1,24 +1,17 @@
+"""
+create word cloud based on commit summary
+"""
+from os import path
+import random
 import numpy as np
 from PIL import Image
-from os import path
 from wordcloud import WordCloud, STOPWORDS
 import matplotlib.pyplot as plt
-import random
 import loadData as ld
 
+dirname = path.dirname(__file__)
 
-def grey_color_func(word,
-                    font_size,
-                    position,
-                    orientation,
-                    random_state=None,
-                    **kwargs):
-    return "hsl(0, 0%%, %d%%)" % random.randint(60, 100)
-
-
-d = path.dirname(__file__)
-
-mask = np.array(Image.open(path.join(d, "resources/stormtrooper_mask.png")))
+mask = np.array(Image.open(path.join(dirname, "resources/stormtrooper_mask.png")))
 
 text = ld.loadSummaries()
 

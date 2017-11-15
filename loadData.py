@@ -1,3 +1,6 @@
+"""
+load commit log
+"""
 from dateutil import parser
 import calendar
 

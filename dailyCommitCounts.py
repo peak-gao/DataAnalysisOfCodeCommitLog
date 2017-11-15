@@ -1,3 +1,6 @@
+"""
+create figure of daily commit counts
+"""
 from pandas import DataFrame, Series
 import matplotlib.pyplot as plt
 import pandas as pd

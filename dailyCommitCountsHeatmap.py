@@ -1,3 +1,6 @@
+"""
+create heatmap of daily commit counts
+"""
 from pandas import DataFrame, Series
 from dateutil import parser
 import numpy as np

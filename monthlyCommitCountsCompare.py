@@ -1,3 +1,6 @@
+"""
+create figure of monthly commit counts
+"""
 from pandas import DataFrame, Series
 from dateutil import parser
 import numpy as np
