@@ -8,7 +8,6 @@ records = ld.load()
 frame = DataFrame(records)
 
 date_value_counts = frame['date'].value_counts().sort_index(level=1)
-# date_value_counts.plot(title='commit couts of each day(2016-01-01 ~ 2017-11-15)')
 
 ts = pd.DataFrame(date_value_counts.values, index=date_value_counts.index, columns=['total'])
 ts.plot(title='commit counts of each day(2016-01-01 ~ 2017-11-15)')
