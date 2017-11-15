@@ -29,7 +29,6 @@ wc = WordCloud(
     random_state=1).generate(text)
 
 default_colors = wc.to_array()
-wc.to_file("commitWordCloud.png")
 plt.figure()
 plt.title("Commit Word Cloud")
 plt.imshow(default_colors, interpolation="bilinear")
