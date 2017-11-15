@@ -1,9 +1,11 @@
 from dateutil import parser
 import calendar
 
+
 def parseLine(line):
     splitString = ':   '
     return line.split(splitString, 1)
+
 
 def parseLines(readLines):
     commitLog = {}
@@ -18,15 +20,18 @@ def parseLines(readLines):
             commitLog['year'] = dateValue.year
     return commitLog
 
+
 def parseSummary(readLines):
     commitSummary = ''
     for line in readLines:
         tokens = parseLine(line)
         if tokens[0] == 'summary':
-           commitSummary = commitSummary+tokens[1]
+            commitSummary = tokens[1]
+            break
     return commitSummary
 
-def load():
+
+def loadCommitLogs():
     lines = open('./commitLogs.log').readlines()
     readLines = []
     commitLogs = []
@@ -38,17 +43,19 @@ def load():
             readLines = []
     return commitLogs
 
-def loadSummary():
+
+def loadSummaries():
     lines = open('./commitLogs.log').readlines()
     readLines = []
-    commitSummary = ''
+    commitSummaries = []
     for line in lines:
         if (line != '\n'):
             readLines.append(line)
         else:
-            commitSummary = commitSummary + parseSummary(readLines)
+            commitSummaries.append(parseSummary(readLines))
             readLines = []
-    return commitSummary
+    return "".join(commitSummaries)
+
 
 if __name__ == "__main__":
-    print load()[-10:]
+    print loadSummaries()

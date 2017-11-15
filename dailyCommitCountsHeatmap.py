@@ -5,8 +5,8 @@ import pandas as pd
 import calmap
 import loadData as ld
 
-records = ld.load()
-frame = DataFrame(records)
+commitLogs = ld.loadCommitLogs()
+frame = DataFrame(commitLogs)
 
 date_value_counts = frame['date'].value_counts().sort_index(level=1)
 all_days = [parser.parse(x) for x in date_value_counts.index]
