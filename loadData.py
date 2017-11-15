@@ -1,46 +1,33 @@
 from dateutil import parser
 import calendar
 
-
-def getValue(line):
+def parseLine(line):
     splitString = ':   '
-    return line.split(splitString)[-1].strip()
+    return line.split(splitString, 1)
 
-
-def createDictionary(changeset, user, date, summary):
-    dateValue = parser.parse(date)
-    return {
-        'changeset': changeset,
-        'user': user,
-        'date': dateValue.strftime('%Y-%m-%d'),
-        'summary': summary,
-        'weekday': calendar.day_abbr[dateValue.weekday()],
-        'month': dateValue.month
-    }
-
+def parseLines(readLines):
+    commitLog = {}
+    for line in readLines:
+        tokens = parseLine(line)
+        commitLog[tokens[0]] = tokens[1].strip()
+        if tokens[0] == 'date':
+            dateValue = parser.parse(tokens[1])
+            commitLog['date'] = dateValue.strftime('%Y-%m-%d')
+            commitLog['weekday'] = calendar.day_abbr[dateValue.weekday()]
+            commitLog['month'] = dateValue.month
+    return commitLog
 
 def load():
-    lines = open('./hg_201711.log').readlines()
-    length = len(lines)
-    commits = []
-
-    #the first 5 lines are tip log
-    tipLines = lines[0:5]
-    changeset = getValue(tipLines[0])
-    user = getValue(tipLines[2])
-    date = getValue(tipLines[3])
-    summary = getValue(tipLines[4])
-    commits.append(createDictionary(changeset, user, date, summary))
-
-    for i in range(6, length, 5):
-        changeset = getValue(lines[i])
-        user = getValue(lines[i + 1])
-        date = getValue(lines[i + 2])
-        summary = getValue(lines[i + 3])
-        commits.append(createDictionary(changeset, user, date, summary))
-
-    return commits
-
-
+    lines = open('./commitLogs.log').readlines()
+    readLines = []
+    commitLogs = []
+    for line in lines:
+        if (line != '\n'):
+            readLines.append(line)
+        else:
+            commitLogs.append(parseLines(readLines))
+            readLines = []
+    return commitLogs
+    
 if __name__ == "__main__":
-    print load()
+    print load()[-10:]
