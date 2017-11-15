@@ -15,6 +15,7 @@ def parseLines(readLines):
             commitLog['date'] = dateValue.strftime('%Y-%m-%d')
             commitLog['weekday'] = calendar.day_abbr[dateValue.weekday()]
             commitLog['month'] = dateValue.month
+            commitLog['year'] = dateValue.year
     return commitLog
 
 def load():
