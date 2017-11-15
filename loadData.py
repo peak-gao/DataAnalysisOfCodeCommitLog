@@ -18,6 +18,14 @@ def parseLines(readLines):
             commitLog['year'] = dateValue.year
     return commitLog
 
+def parseSummary(readLines):
+    commitSummary = ''
+    for line in readLines:
+        tokens = parseLine(line)
+        if tokens[0] == 'summary':
+           commitSummary = commitSummary+tokens[1]
+    return commitSummary
+
 def load():
     lines = open('./commitLogs.log').readlines()
     readLines = []
@@ -29,6 +37,18 @@ def load():
             commitLogs.append(parseLines(readLines))
             readLines = []
     return commitLogs
-    
+
+def loadSummary():
+    lines = open('./commitLogs.log').readlines()
+    readLines = []
+    commitSummary = ''
+    for line in lines:
+        if (line != '\n'):
+            readLines.append(line)
+        else:
+            commitSummary = commitSummary + parseSummary(readLines)
+            readLines = []
+    return commitSummary
+
 if __name__ == "__main__":
     print load()[-10:]
