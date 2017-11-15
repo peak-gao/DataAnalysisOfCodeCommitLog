@@ -8,6 +8,7 @@ import calendar
 
 commitLogs = ld.loadCommitLogs()
 frame = DataFrame(commitLogs)
+frame = frame[frame['summary'].str.contains('bug')]
 
 year_month_commit_counts = frame.groupby(['year',
                                           'month']).count()['changeset']
@@ -27,4 +28,4 @@ if (len(values_2017) < len(values_2016)):
 values = np.vstack((values_2016, values_2017))
 
 df = pd.DataFrame(values.T, index=monthIndex, columns=[2016, 2017])
-df.plot(title='Monthly commit counts')
+df.plot(title='Monthly commit counts for bug')

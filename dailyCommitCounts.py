@@ -7,11 +7,11 @@ import loadData as ld
 commitLogs = ld.loadCommitLogs()
 frame = DataFrame(commitLogs)
 
-date_valuie_counts = frame['date'].value_counts()
+date_value_counts = frame['date'].value_counts()
 
 firtItem = date_value_counts.head(1)
-print 'Maximum is {0} from date {1}'.format(firtItem.values[0],
-                                            firtItem.index[0])
+print 'Maximum is {0} from date {1}, Average is {2}'.format(
+    firtItem.values[0], firtItem.index[0], date_value_counts.mean())
 
 date_value_counts = date_value_counts.sort_index(level=1)
 
