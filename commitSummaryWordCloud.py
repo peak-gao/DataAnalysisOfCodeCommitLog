@@ -17,8 +17,11 @@ text = ld.loadSummaries()
 
 stopwords = set(STOPWORDS)
 
-wc = WordCloud(
-    max_words=100, mask=mask, stopwords=stopwords, margin=10,
+# wc = WordCloud(
+#     max_words=1000, mask=mask, stopwords=stopwords, margin=10,
+#     random_state=1).generate(text)
+
+wc = WordCloud(background_color="white", stopwords=stopwords, margin=10,
     random_state=1).generate(text)
 
 default_colors = wc.to_array()
